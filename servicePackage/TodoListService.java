@@ -23,13 +23,20 @@ public class TodoListService {
 		// TODO: get or create the todoList
 		TodoListClass todoList = new TodoListClass();
 		//
-		for(int task_n = 1; task_n < numberOfTasks ; task_n++) {
-			createSingleTask();
+		for(int task_n = 1; task_n <= numberOfTasks ; task_n++) {
+			TaskClass task = getSingleTask(task_n);
+			todoList.addTaskToList(task);
 		}
+		System.out.println(todoList.getTaskList());
 	}
 	
-	private void createSingleTask() {
-		
+	// TODO: taskService ?
+	private TaskClass getSingleTask(int task_n) {
+		return createSingleTask(task_n);
+	}
+	
+	private TaskClass createSingleTask(int task_n) {
+		return new TaskClass(task_n);
 	}
 	
 	public void takeAndPrint() {
