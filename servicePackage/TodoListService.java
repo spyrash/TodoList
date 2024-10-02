@@ -1,4 +1,5 @@
 package servicePackage;
+import classPackage.*;
 import java.util.Scanner;
 
 public class TodoListService {
@@ -7,6 +8,8 @@ public class TodoListService {
 	public TodoListService() {
 		this.scannerInput = new Scanner(System.in);
 	}
+	
+	// do not save the todo list (for now).
 	public void startServiceSequence() {
 		System.out.println("Insert the number of task you want to add in the todolist:");
 		String outputMsg;
@@ -17,12 +20,15 @@ public class TodoListService {
 			outputMsg = "Nice! let's start to configure this single task";
 		}
 		System.out.println(outputMsg);
+		// TODO: get or create the todoList
+		TodoListClass todoList = new TodoListClass();
+		//
 		for(int task_n = 1; task_n < numberOfTasks ; task_n++) {
-			addSingleTask();
+			createSingleTask();
 		}
 	}
 	
-	private void addSingleTask() {
+	private void createSingleTask() {
 		
 	}
 	
