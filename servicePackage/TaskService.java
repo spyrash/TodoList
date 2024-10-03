@@ -1,6 +1,8 @@
 package servicePackage;
 
 import classPackage.TaskClass;
+import enumPackage.TaskStatusEnum;
+
 import java.util.*;
 
 public class TaskService {
@@ -23,10 +25,11 @@ public class TaskService {
 		System.out.println(task_n + ") Insert the content of the task:");
 		String contentTask = scannerInput.nextLine();
 		task.setTaskContent(contentTask);
+		// just set this as backlog, then do service to change status single task.
 
-		// System.out.println("Insert the number of task you want to add in the todolist:");
-		// TODO: get input status or just set this as backlog, then do service to change status single task.(2nd is better)
-		// System.out.println("Insert the number of task you want to add in the todolist:");
+		task.setTaskStatus(TaskStatusEnum.BACKLOG);
+		
+		// TODO: support start date and end date
 		
 		return task;
 	}

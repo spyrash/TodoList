@@ -1,8 +1,10 @@
 package classPackage;
 
+import enumPackage.TaskStatusEnum;
+
 public class TaskClass {
 	private int taskId;
-	private String taskStatus;
+	private TaskStatusEnum taskStatus;
 	private String taskContent;
 	private String taskTitle;
 	// private String startDate;
@@ -18,12 +20,12 @@ public class TaskClass {
 		return taskId;
 	}
 
-	public String getTaskStatus() {
+	public TaskStatusEnum getTaskStatus() {
 		return taskStatus;
 	}
 
-	public void setTaskStatus(String taskStatus) {
-		this.taskStatus = taskStatus;
+	public void setTaskStatus(TaskStatusEnum taskEnumValue) {
+		this.taskStatus = taskEnumValue;
 	}
 
 	public String getTaskContent() {

@@ -30,6 +30,7 @@ public class TodoListService {
 			TaskClass task = taskService.getSingleTask(task_n);
 			todoList.addTaskToList(task);
 		}
+		// TODO: save to a file
 		System.out.println(todoList.toString());
 	}
 	
