@@ -19,5 +19,11 @@ public class TodoListClass {
 		taskList.remove(taskId);
 	}
 	
-	
+	public String toString() {
+		StringBuilder formattedString = new StringBuilder();
+		taskList.forEach((k, v) -> {
+		    formattedString.append("-------------------------------------------------------------------\n").append(v.toString());
+		});
+		return formattedString.toString();
+	}
 }
