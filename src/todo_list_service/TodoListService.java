@@ -13,10 +13,10 @@ public class TodoListService {
 		this.taskService = new TaskService();
 	}
 	
-	// do not save the todo list (for now).
 	public void startServiceSequence() {
 		System.out.println("Insert the number of task you want to add in the todolist:");
 		String outputMsg;
+		TodoListClass todoList;
 		int numberOfTasks = scannerInput.nextInt();
 		scannerInput.nextLine();  
 		
@@ -26,28 +26,49 @@ public class TodoListService {
 			outputMsg = "Nice! let's start to configure this single task";
 		}
 		System.out.println(outputMsg);
-		// TODO: get or create the todoList
-        File file = new File(TodoListClass.filePath);
         
-		TodoListClass todoList = new TodoListClass();
+        // Check if the file exists
+        File file = new File(TodoListClass.filePath);
+        if (file.exists()) {
+            // File exists, load the task list
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+               
+            	// Deserialize the task list
+                todoList = (TodoListClass) ois.readObject();
+                System.out.println("Task list loaded from file.");
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+                return;
+            }
+        } else {
+            // File does not exist, create it
+            try {
+                file.createNewFile();
+                System.out.println("File does not exist. Creating a new file.");
+                todoList = new TodoListClass();
+               
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+        }
 		//
+        int previousId = todoList.getMaxId();
 		for(int task_n = 1; task_n <= numberOfTasks ; task_n++) {
-			TaskClass task = taskService.getSingleTask(task_n);
+			TaskClass task = taskService.getSingleTask(task_n + previousId);
 			todoList.addTaskToList(task);
 		}
-		// TODO: save to a file
-		FileWriter writer;
-		try {
-			writer = new FileWriter(file, true);
-			writer.write(todoList.toString());
-			writer.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
+	    // Save the task list to a file
+        try (FileOutputStream fileOut = new FileOutputStream(TodoListClass.filePath);
+             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+            out.writeObject(todoList);
+            System.out.println("Task list serialized to " + TodoListClass.filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 		
 		System.out.println(todoList.toString());
-	}
-	
+		}
 
 }

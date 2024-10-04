@@ -1,8 +1,12 @@
 package todo_list_class;
 
+import java.io.Serializable;
+
 import todo_list_enum.TaskStatusEnum;
 
-public class TaskClass {
+public class TaskClass implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private int taskId;
 	private TaskStatusEnum taskStatus;
 	private String taskContent;

@@ -1,6 +1,8 @@
 package todo_list_class;
+import java.io.Serializable;
 import java.util.HashMap;
-public class TodoListClass {
+public class TodoListClass implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private HashMap<Integer, TaskClass> taskList;
 	public static final String filePath = "TODO.txt";
 	
@@ -26,5 +28,10 @@ public class TodoListClass {
 		    formattedString.append("-------------------------------------------------------------------\n").append(v.toString());
 		});
 		return formattedString.toString();
+	}
+	
+	public int getMaxId() {
+		int countId = taskList.size();
+		return countId;
 	}
 }
