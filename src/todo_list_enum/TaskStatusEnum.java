@@ -1,4 +1,4 @@
-package enumPackage;
+package todo_list_enum;
 
 public enum TaskStatusEnum {
 	BACKLOG,

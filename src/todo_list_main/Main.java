@@ -1,6 +1,6 @@
-package mainPackage;
+package todo_list_main;
 
-import servicePackage.*;
+import todo_list_service.*;
 
 
 public class Main {

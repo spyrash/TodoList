@@ -1,6 +1,6 @@
-package classPackage;
+package todo_list_class;
 
-import enumPackage.TaskStatusEnum;
+import todo_list_enum.TaskStatusEnum;
 
 public class TaskClass {
 	private int taskId;

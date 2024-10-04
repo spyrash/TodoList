@@ -1,7 +1,8 @@
-package classPackage;
+package todo_list_class;
 import java.util.HashMap;
 public class TodoListClass {
 	private HashMap<Integer, TaskClass> taskList;
+	public static final String filePath = "TODO.txt";
 	
 	public TodoListClass() {
 		this.taskList = new HashMap<Integer, TaskClass>();
