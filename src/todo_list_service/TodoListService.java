@@ -8,9 +8,11 @@ import java.io.*;
 public class TodoListService {
 	Scanner scannerInput;
 	TaskService taskService;
+	FileHandlerService fileHandlerService;
 	public TodoListService() {
 		this.scannerInput = new Scanner(System.in);
 		this.taskService = new TaskService();
+		this.fileHandlerService = new FileHandlerService();
 	}
 	
 	public void startServiceSequence() {
@@ -27,31 +29,7 @@ public class TodoListService {
 		}
 		System.out.println(outputMsg);
         
-        // Check if the file exists
-        File file = new File(TodoListClass.filePath);
-        if (file.exists()) {
-            // File exists, load the task list
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-               
-            	// Deserialize the task list
-                todoList = (TodoListClass) ois.readObject();
-                System.out.println("Task list loaded from file.");
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-                return;
-            }
-        } else {
-            // File does not exist, create it
-            try {
-                file.createNewFile();
-                System.out.println("File does not exist. Creating a new file.");
-                todoList = new TodoListClass();
-               
-            } catch (IOException e) {
-                e.printStackTrace();
-                return;
-            }
-        }
+		todoList = fileHandlerService.getTodoListByFile();
 		//
         int previousId = todoList.getMaxId();
 		for(int task_n = 1; task_n <= numberOfTasks ; task_n++) {
