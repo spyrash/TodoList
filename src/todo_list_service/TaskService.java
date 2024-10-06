@@ -34,4 +34,44 @@ public class TaskService {
 		
 		return task;
 	}
+	
+	public void editTitle (TaskClass task) {
+		System.out.println("Current title: " + task.getTaskTitle());
+		System.out.println("New title: ");
+		String newTitle = scannerInput.nextLine();
+		task.setTaskTitle(newTitle);
+		System.out.println("Title changed!");
+	}
+	
+	public void editContent (TaskClass task) {
+		System.out.println("Current content: " + task.getTaskContent());
+		System.out.println("New content: ");
+		String newContent = scannerInput.nextLine();
+		task.setTaskContent(newContent);
+		System.out.println("Content changed!");
+	}
+	
+	public void editStatus (TaskClass task) {
+		TaskStatusEnum status = null;
+		System.out.println("Current status: " + task.getTaskStatus());
+		System.out.println("Choose new status");
+		System.out.println("1) " + TaskStatusEnum.BACKLOG + "(a)");
+		System.out.println("2) " + TaskStatusEnum.DOING + "(b)");
+		System.out.println("3) " + TaskStatusEnum.TEST + "(c)");
+		System.out.println("4) " + TaskStatusEnum.DONE+ "(d)");
+		String input = scannerInput.nextLine();
+		char choice = input.charAt(0);
+		switch (choice) {
+		case 'a':
+			status = TaskStatusEnum.BACKLOG;
+		case 'b':
+			status = TaskStatusEnum.DOING;
+		case 'c':
+			status = TaskStatusEnum.TEST;
+		case 'd':
+			status = TaskStatusEnum.DONE;
+		}
+		task.setTaskStatus(status);
+		System.out.println("Status changed!");
+	}
 }

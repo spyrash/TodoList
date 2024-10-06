@@ -34,4 +34,8 @@ public class TodoListClass implements Serializable {
 		int countId = taskList.size();
 		return countId;
 	}
+	
+	public TaskClass getTask(int idTask) {
+		return taskList.get(idTask);
+	}
 }
