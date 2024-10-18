@@ -23,10 +23,10 @@ The project consists of the following core classes:
 ### 3. `FileHandlerService`
    Manages loading and saving the to-do list to/from a file. Ensures that the task list is persistent across application sessions.
 
-### 4. `TodoListClass` *(Not shown in the code above)*
+### 4. `TodoListClass` 
    A class that represents the to-do list itself, storing tasks and offering methods to manage them.
 
-### 5. `TaskClass` *(Not shown in the code above)*
+### 5. `TaskClass` 
    Represents an individual task, containing attributes like title, content, and status.
 
 ### 6. `TaskStatusEnum`
