@@ -6,3 +6,5 @@
 # Ignore build output directories (like bin/)
 bin/
 target/
+example.txt
+TODO.txt
