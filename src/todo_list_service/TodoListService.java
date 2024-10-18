@@ -1,4 +1,5 @@
 package todo_list_service;
+
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.*;
@@ -18,28 +19,17 @@ public class TodoListService {
 	final char removeTask = 'd';
 	final char printTitlesTask = 'e';
 	final char exit = 'z';
-	
+
 	final char editTitle = 'f';
 	final char editContent = 'g';
 	final char editStatus = 'h';
 
-	private void saveTodoList(TodoListClass todoList) {
-		System.out.println("updating the todo list...");
-		   // Save the task list to a file
-		try (FileOutputStream fileOut = new FileOutputStream(TodoListClass.filePath);
-			ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
-			out.writeObject(todoList);
-			} catch (IOException e) {
-				e.printStackTrace();
-				}
-		}
-	
 	public TodoListService() {
 		this.scannerInput = new Scanner(System.in);
 		this.taskService = new TaskService();
 		this.fileHandlerService = new FileHandlerService();
 	}
-	
+
 	public void startServiceSequence() {
 		dispatcherOfChoice();
 	}
@@ -59,7 +49,7 @@ public class TodoListService {
 			System.out.println("6) Exit (z)");
 			String input = scannerInput.nextLine();
 			char choice = input.charAt(0);
-	
+
 			switch (choice) {
 			case addTask:
 				todoList = addTask(todoList);
@@ -81,37 +71,37 @@ public class TodoListService {
 				break;
 			}
 			if (continueDispatcher) {
-			System.out.println("Would you like to do something else?");
+				System.out.println("Would you like to do something else?");
 			}
 		}
 		System.out.println("Bye!");
 	}
-	
+
 	public TodoListClass addTask(TodoListClass todoList) {
 		System.out.println("Insert the number of task you want to add in the todolist:");
 		String outputMsg;
 		int numberOfTasks = scannerInput.nextInt();
-		scannerInput.nextLine();  
-		
+		scannerInput.nextLine();
+
 		if (numberOfTasks > 1) {
 			outputMsg = "Nice! let's start to configure each of the tasks:";
 		} else {
 			outputMsg = "Nice! let's start to configure this single task";
 		}
 		System.out.println(outputMsg);
-        
-        int previousId = todoList.getMaxId();
-		for(int task_n = 1; task_n <= numberOfTasks ; task_n++) {
+
+		int previousId = todoList.getMaxId();
+		for (int task_n = 1; task_n <= numberOfTasks; task_n++) {
 			TaskClass task = taskService.getSingleTask(task_n + previousId);
 			todoList.addTaskToList(task);
 		}
-	
-	    // Save the task list to a file
-        saveTodoList(todoList);
-		
-        return todoList;
+
+		// Save the task list to a file
+		FileHandlerService.saveTodoListToFile(todoList);
+
+		return todoList;
 	}
-	
+
 	public TodoListClass editTask(TodoListClass todoList) {
 
 		TaskClass task = null;
@@ -125,11 +115,11 @@ public class TodoListService {
 			int taskId = scannerInput.nextInt();
 			task = todoList.getTask(taskId);
 			scannerInput.nextLine();
-			} catch(Exception e) {
-				System.out.println("Something went wrong!");
-				System.exit(1);
+		} catch (Exception e) {
+			System.out.println("Something went wrong!");
+			System.exit(1);
 		}
-		System.out.println("Task obtained:"+ task.toString());
+		System.out.println("Task obtained:" + task.toString());
 
 		while (continueEdit) {
 			System.out.println("What you want to change about this task?");
@@ -153,27 +143,27 @@ public class TodoListService {
 				continueEdit = false;
 			}
 		}
-	    // Save the task list to a file
-        saveTodoList(todoList);
+		// Save the task list to a file
+		FileHandlerService.saveTodoListToFile(todoList);
 		return todoList;
 	}
-	
+
 	public TodoListClass removeTask(TodoListClass todoList) {
 		TaskClass task = null;
 		int taskId = 0;
-	
+
 		if (todoList.getTaskList().isEmpty()) {
 			System.out.println("The Todo list is empty! sorry!");
 			return todoList;
 		}
 		System.out.println("Please inserte the ID of the task to remove:");
 		try {
-		    taskId = scannerInput.nextInt();
+			taskId = scannerInput.nextInt();
 			task = todoList.getTask(taskId);
 			scannerInput.nextLine();
-			} catch(Exception e) {
-				System.out.println("Something went wrong!");
-				System.exit(1);
+		} catch (Exception e) {
+			System.out.println("Something went wrong!");
+			System.exit(1);
 		}
 		if (0 == taskId) {
 			System.exit(1);
@@ -184,7 +174,7 @@ public class TodoListService {
 		}
 		todoList.removeSingleTask(taskId);
 		System.out.println("Task removed");
-		saveTodoList(todoList);
+		FileHandlerService.saveTodoListToFile(todoList);
 		return todoList;
 	}
 

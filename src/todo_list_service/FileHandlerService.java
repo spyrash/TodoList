@@ -2,8 +2,10 @@ package todo_list_service;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import todo_list_class.TodoListClass;
 
@@ -39,4 +41,15 @@ public class FileHandlerService {
         
         return todoList;
 	}
+	
+	public static void saveTodoListToFile(TodoListClass todoList) {
+		System.out.println("updating the todo list...");
+		   // Save the task list to a file
+		try (FileOutputStream fileOut = new FileOutputStream(TodoListClass.filePath);
+			ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+			out.writeObject(todoList);
+			} catch (IOException e) {
+				e.printStackTrace();
+				}
+		}
 }
