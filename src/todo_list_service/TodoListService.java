@@ -23,6 +23,17 @@ public class TodoListService {
 	final char editContent = 'g';
 	final char editStatus = 'h';
 
+	private void saveTodoList(TodoListClass todoList) {
+		System.out.println("updating the todo list...");
+		   // Save the task list to a file
+		try (FileOutputStream fileOut = new FileOutputStream(TodoListClass.filePath);
+			ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+			out.writeObject(todoList);
+			} catch (IOException e) {
+				e.printStackTrace();
+				}
+		}
+	
 	public TodoListService() {
 		this.scannerInput = new Scanner(System.in);
 		this.taskService = new TaskService();
@@ -31,7 +42,7 @@ public class TodoListService {
 	
 	public void startServiceSequence() {
 		dispatcherOfChoice();
-		}
+	}
 
 	public void dispatcherOfChoice() {
 		boolean continueDispatcher = true;
@@ -62,8 +73,9 @@ public class TodoListService {
 			case removeTask:
 				removeTask(todoList);
 				break;
-				//TODO: complete this !
 			case printTitlesTask:
+				System.out.println(todoList.titlesToString());
+				break;
 			case exit:
 				continueDispatcher = false;
 				break;
@@ -95,13 +107,7 @@ public class TodoListService {
 		}
 	
 	    // Save the task list to a file
-        try (FileOutputStream fileOut = new FileOutputStream(TodoListClass.filePath);
-             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
-            out.writeObject(todoList);
-            System.out.println("Task list serialized to " + TodoListClass.filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        saveTodoList(todoList);
 		
         return todoList;
 	}
@@ -147,15 +153,8 @@ public class TodoListService {
 				continueEdit = false;
 			}
 		}
-		System.out.println("updating the todo list...");
-		   // Save the task list to a file
-        try (FileOutputStream fileOut = new FileOutputStream(TodoListClass.filePath);
-             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
-            out.writeObject(todoList);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println("Done, bye!");
+	    // Save the task list to a file
+        saveTodoList(todoList);
 		return todoList;
 	}
 	
@@ -185,7 +184,7 @@ public class TodoListService {
 		}
 		todoList.removeSingleTask(taskId);
 		System.out.println("Task removed");
-		//TODO: add the save!
+		saveTodoList(todoList);
 		return todoList;
 	}
 

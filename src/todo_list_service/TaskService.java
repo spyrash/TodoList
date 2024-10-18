@@ -64,12 +64,16 @@ public class TaskService {
 		switch (choice) {
 		case 'a':
 			status = TaskStatusEnum.BACKLOG;
+			break;
 		case 'b':
 			status = TaskStatusEnum.DOING;
+			break;
 		case 'c':
 			status = TaskStatusEnum.TEST;
+			break;
 		case 'd':
 			status = TaskStatusEnum.DONE;
+			break;
 		}
 		task.setTaskStatus(status);
 		System.out.println("Status changed!");

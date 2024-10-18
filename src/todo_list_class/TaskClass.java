@@ -58,5 +58,13 @@ public class TaskClass implements Serializable{
 		return formattedString.toString();
 	}
 	
+	public String titleToString() {
+		StringBuilder formattedString = new StringBuilder();
+		formattedString.append("\n ID: ").append(taskId+", ");
+		formattedString.append("\n TITLE: ").append(taskTitle+"\n");
+
+		return formattedString.toString();
+	}
+	
 	
 }

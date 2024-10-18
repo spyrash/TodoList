@@ -30,6 +30,14 @@ public class TodoListClass implements Serializable {
 		return formattedString.toString();
 	}
 	
+	public String titlesToString() {
+		StringBuilder formattedString = new StringBuilder();
+		taskList.forEach((k, v) -> {
+		    formattedString.append("-------------------------------------------------------------------\n").append(v.titleToString());
+		});
+		return formattedString.toString();
+	}
+	
 	public int getMaxId() {
 		int countId = taskList.size();
 		return countId;
