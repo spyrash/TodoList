@@ -1,8 +1,5 @@
 package enums;
 
 public enum TaskStatusEnum {
-	BACKLOG,
-	DOING,
-	TEST,
-	DONE
+	BACKLOG, DOING, TEST, DONE
 }
