@@ -1,4 +1,4 @@
-package todo_list_class;
+package entity;
 import java.io.Serializable;
 import java.util.HashMap;
 public class TodoListClass implements Serializable {

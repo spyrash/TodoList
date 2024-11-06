@@ -1,8 +1,8 @@
-package todo_list_class;
+package entity;
 
 import java.io.Serializable;
 
-import todo_list_enum.TaskStatusEnum;
+import enums.TaskStatusEnum;
 
 public class TaskClass implements Serializable{
 

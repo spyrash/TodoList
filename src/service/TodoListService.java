@@ -1,12 +1,9 @@
-package todo_list_service;
+package service;
 
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
-import java.util.*;
 
-import todo_list_class.*;
-
-import java.io.*;
+import entity.TaskClass;
+import entity.TodoListClass;
 
 public class TodoListService {
 	Scanner scannerInput;

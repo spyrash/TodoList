@@ -1,4 +1,4 @@
-package todo_list_service;
+package service;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import todo_list_class.TodoListClass;
+import entity.TodoListClass;
 
 public class FileHandlerService {
 	

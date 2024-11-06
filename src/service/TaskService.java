@@ -1,10 +1,9 @@
-package todo_list_service;
-
-import todo_list_enum.TaskStatusEnum;
+package service;
 
 import java.util.*;
 
-import todo_list_class.TaskClass;
+import entity.TaskClass;
+import enums.TaskStatusEnum;
 
 public class TaskService {
 	
